@@ -4,7 +4,7 @@
 .git
 .replit
 replit.nix
-
+package-lock.json
 
 # Logs
 logs
