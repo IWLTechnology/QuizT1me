@@ -1,0 +1,13 @@
+{
+	"title": "| QuizTime",
+	"description": "A quiz application produced for an educational project",
+	"titleExclusive": "QuizTime",
+	"icon": "",
+	"image": "",
+	"manifest": "manifest.json",
+	"style": "style.css",
+	"installScript": "install.js",
+	"soundScript": "./soundjs-NEXT.combined.js",
+	"script": "script.js",
+	"db": "SQLite"
+}
