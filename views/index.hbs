@@ -2,17 +2,13 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="w3.css">
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="{{seo.css}}">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>Home {{seo.title}}</title>
 	</head>
 	<body>
-		<h1>Hi from {{seo.titleExclusive}}</h1>
-		<ul id="messages"></ul>
-		<form id="form" action="">
-			<input id="input" autocomplete="off"><button>Send</button>
-		</form>
+		<div class="w3-bar w3-top w3-purple"><h3>Home {{seo.title}}</h3><span>&nbsp;</span><h3 class="w3-btn w3-purple w3-ripple">Settings</h3><h3 class="w3-btn w3-purple w3-ripple">Play</h3></div>
 		<script src="/socket.io/socket.io.js"></script>
-		<script src="script.js"></script>
+		<script src="{{seo.js}}"></script>
 	</body>
 </html>

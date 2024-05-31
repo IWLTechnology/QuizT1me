@@ -5,9 +5,9 @@
 	"icon": "",
 	"image": "",
 	"manifest": "manifest.json",
-	"style": "style.css",
+	"css": "style.css",
 	"installScript": "install.js",
 	"soundScript": "./soundjs-NEXT.combined.js",
-	"script": "script.js",
+	"js": "script.js",
 	"db": "SQLite"
 }
