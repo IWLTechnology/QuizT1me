@@ -1,6 +1,6 @@
 {
 	"title": "| QuizT1me",
-	"description": "A quiz application produced for an educational project",
+	"description": "A quiz application made for an educational project. It stores your highscores in a database.",
 	"titleExclusive": "QuizT1me",
 	"icon": "",
 	"image": "",
@@ -8,6 +8,5 @@
 	"css": "style.css",
 	"installScript": "install.js",
 	"soundScript": "./soundjs-NEXT.combined.js",
-	"js": "script.js",
 	"db": "SQLite"
 }

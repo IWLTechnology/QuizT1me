@@ -1,0 +1,175 @@
+{
+	"name": "QuizT1me!",
+	"short_name": "QuizT1me!",
+	"start_url": "/PWA",
+	"display": "fullscreen",
+	"orientation": "any",
+	"display_override": ["window-controls-overlay", "fullscreen"],
+	"background_color": "#ffffff",
+	"theme_color": "#ff3385",
+	"icons": [
+		{
+			"sizes": "2048x2048",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO.jpg?v=1709518823810",
+			"purpose": "any"
+		},{
+			"sizes": "512x512",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_512.jpg?v=1715335689220",
+			"purpose": "any"
+		},
+		{
+			"sizes": "192x192",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_192.jpg?v=1715335689219",
+			"purpose": "any"
+		},
+		{
+			"sizes": "180x180",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_180.jpg?v=1715335692257",
+			"purpose": "any"
+		},
+		{
+			"sizes": "144x144",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_144.jpg?v=1715501834068",
+			"purpose": "any"
+		},
+		{
+			"sizes": "120x120",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_120.jpg?v=1715335695001",
+			"purpose": "any"
+		},
+		{
+			"sizes": "2048x2048",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO.png?v=1709518823810",
+			"purpose": "any"
+		},{
+			"sizes": "512x512",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_512.png?v=1715335689220",
+			"purpose": "any"
+		},
+		{
+			"sizes": "192x192",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_192.png?v=1715335689219",
+			"purpose": "any"
+		},
+		{
+			"sizes": "180x180",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_180.png?v=1715335692257",
+			"purpose": "any"
+		},
+		{
+			"sizes": "144x144",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_144.png?v=1715501834068",
+			"purpose": "any"
+		},
+		{
+			"sizes": "120x120",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_120.png?v=1715335695001",
+			"purpose": "any"
+		},
+		{
+			"sizes": "2048x2048",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO.jpg?v=1709518823810",
+			"purpose": "maskable"
+		},{
+			"sizes": "512x512",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_512.jpg?v=1715335689220",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "192x192",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_192.jpg?v=1715335689219",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "180x180",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_180.jpg?v=1715335692257",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "144x144",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_144.jpg?v=1715501834068",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "120x120",
+			"type": "image/jpg",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_120.jpg?v=1715335695001",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "2048x2048",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO.png?v=1709518823810",
+			"purpose": "maskable"
+		},{
+			"sizes": "512x512",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_512.png?v=1715335689220",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "192x192",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_192.png?v=1715335689219",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "180x180",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_180.png?v=1715335692257",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "144x144",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_144.png?v=1715501834068",
+			"purpose": "maskable"
+		},
+		{
+			"sizes": "120x120",
+			"type": "image/png",
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/IWL_ROCKET_LOGO_120.png?v=1715335695001",
+			"purpose": "maskable"
+		}
+	],
+	"description": "A quiz application made for an educational project. It stores your highscores in a database.",
+	"lang": "en",
+	"categories": [
+		"quiz",
+		"highscore",
+		"database",
+		"utilities",
+		"educational"
+	],
+	"screenshots": [
+		{
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/screenshotM1.png?v=1715561231633",
+			"type": "image/png",
+			"sizes": "540x720",
+			"form_factor": "narrow"
+		},
+		{
+			"src": "https://cdn.glitch.global/6e956837-d71d-4381-b8e8-10bc54d84ceb/screenshotD1.png?v=1715560980923",
+			"type": "image/png",
+			"sizes": "1024x764",
+			"form_factor": "wide"
+		}
+	]
+}

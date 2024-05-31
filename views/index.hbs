@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="w3.css">
-		<link rel="stylesheet" href="{{seo.css}}">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <base href="https://quizt1me.glitch.me">
+		<link rel="stylesheet" href="/w3.css">
+		<link rel="stylesheet" href="/style.css">
+		<link rel="stylesheet" href="/fonts/PermanentMarker.ttf">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<title>Home {{seo.title}}</title>
 	</head>
 	<body>
-		<div class="w3-bar w3-top w3-purple"><h3>Home {{seo.title}}</h3><span>&nbsp;</span><h3 class="w3-btn w3-purple w3-ripple">Settings</h3><h3 class="w3-btn w3-purple w3-ripple">Play</h3></div>
+        <div class="w3-top">
+            <div class="w3-bar w3-black">
+              <h3 style="" class="w3-bar-item w3-button w3-show-inline-block start"><span class="logo"></span><span></span><span class="menu">Home {{seo.title}}</span></h3>
+              <h3 onclick="settings()" class="w3-bar-item w3-button w3-right ab w3-show-inline-block"><span class="logo"></span><span></span><span class="menu2">Settings</span></h3>
+              <h3 onclick="play()" class="w3-bar-item w3-button w3-right ab w3-show-inline-block"><span class="logo"></span><span></span><span class="menu2">Play</span></h3>
+            </div>
+          </div>
 		<script src="/socket.io/socket.io.js"></script>
-		<script src="{{seo.js}}"></script>
+		<script src="/script.js"></script>
 	</body>
 </html>
