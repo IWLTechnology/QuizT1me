@@ -1,21 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
-        <base href="https://quizt1me.glitch.me">
-		<link rel="stylesheet" href="/w3.css">
-		<link rel="stylesheet" href="/style.css">
-		<link rel="stylesheet" href="/fonts/PermanentMarker.ttf">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<base href="" />
+		<!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />-->
+		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css"
+		/>
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+		<link rel="stylesheet" href="/w3.css" />
+		<link rel="stylesheet" href="/style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+			rel="stylesheet"
+		/>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 		<title>Home {{seo.title}}</title>
 	</head>
-	<body>
-        <div class="w3-top">
-            <div class="w3-bar w3-black">
-              <h3 style="" class="w3-bar-item w3-button w3-show-inline-block start"><span class="logo"></span><span></span><span class="menu">Home {{seo.title}}</span></h3>
-              <h3 onclick="settings()" class="w3-bar-item w3-button w3-right ab w3-show-inline-block"><span class="logo"></span><span></span><span class="menu2">Settings</span></h3>
-              <h3 onclick="play()" class="w3-bar-item w3-button w3-right ab w3-show-inline-block"><span class="logo"></span><span></span><span class="menu2">Play</span></h3>
-            </div>
-          </div>
+	<body onload="init()">
+		<div class="w3-top">
+			<div class="w3-bar w3-black">
+				<div id="popupBox" class="alfa-slab-one"><span id="popup"></span></div>
+				<h3 style="" class="w3-bar-item w3-button w3-show-inline-block start">
+					<span class="logo"></span><span></span
+					><span class="nav-home"
+						><span id="nav1">Home</span> {{seo.title}}</span
+					>
+				</h3>
+				<h3
+					id="nav3btn"
+					onclick="settings(0)"
+					class="w3-bar-item w3-button w3-right ab w3-show-inline-block"
+				>
+					<span class="logo"></span><span></span
+					><span class="nav-other" id="nav3">Settings</span>
+				</h3>
+				<h3
+					id="nav2btn"
+					onclick="play()"
+					class="w3-bar-item w3-button w3-right ab w3-show-inline-block"
+				>
+					<span class="logo"></span><span></span
+					><span class="nav-other" id="nav2">Play</span>
+				</h3>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<noscript>
+			<h1 class="purple w3-center alfa-slab-one">
+				This website requires JavaScript to work. Please enable javascript then
+				reload to use QuizT1me.
+			</h1>
+		</noscript>
+		<div id="home" class="hide">
+			<div class="w3-center">
+				<h1 id="counter" class="purple"><b>{{counter}}</b></h1>
+				<h3 class="purple">
+					people have played QuizT1me since the project started!
+				</h3>
+				<br />
+				<br />
+				<br />
+				<div class="w3-show-inline-block">
+					<button
+						class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+						onclick="play()"
+					>
+						Play
+					</button>
+					<button
+						class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+						onclick="settings(0)"
+					>
+						Settings
+					</button>
+				</div>
+			</div>
+		</div>
+		<div id="settings" class="w3-center hide">
+			<h1>Settings</h1>
+		</div>
+		<div id="beforeplay" class="w3-center hide">
+			<br /><br />
+			<h1 class="alfa-slab-one">Play</h1>
+			<hr class="w3-purple w3-border-purple" style="border-width: 3px" />
+			<br />
+			<button
+				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+				onclick="changeQuestions()"
+			>
+				Change the number of questions you will have in your quiz
+			</button>
+			<button
+				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+				onclick="highscores()"
+			>
+				Show highscores
+			</button>
+			<div id="nofq-div" style="display: none!important;" title="Change the number of questions">
+				<p>
+					Please enter a value from 10 to 20:
+					<input
+						type="number"
+						placeholder="Enter a value from 10 to 20"
+						min="10"
+						max="20"
+						value="10"
+						id="nofq-input"
+					/><br><button
+						class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+						onclick="closenofq(0)"
+					>
+						Keep it at 10
+					</button>
+					<button
+						class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+						onclick="closenofq(1)"
+					>
+						Apply
+					</button>
+				</p>
+			</div>
+		</div>
+		<div id="credits" class="w3-bottom">
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<div class="w3-bar w3-black w3-center">
+				<h6>
+					<div class="links">
+						<span
+							>Powered by
+							<a
+								target="_blank"
+								href="https://www.w3schools.com/w3css/w3css_intro.asp"
+								>W3.CSS</a
+							>
+							| Credit to
+							<a target="_blank" href="https://www.w3schools.com/">w3schools</a>
+							for some code |
+							<a href="#" onclick="credits()">Learn More</a></span
+						>
+					</div>
+				</h6>
+			</div>
+		</div>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/script.js"></script>
 	</body>

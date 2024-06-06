@@ -1,3 +1,49 @@
-.menu1{
+.nav-other {
+	font-family: Alfa Slab One;
+}
+.nav-home {
 	font-family: Permanent Marker;
+} 
+h6{ 
+	padding-left: 20px;
+}
+#counter {
+	font-size: 1500%;
+	font-family: Alfa Slab One;
+}
+.purple{
+	color: #9c27b0;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
+.alfa-slab-one {
+	font-family: Alfa Slab One;
+}
+.no-close .ui-dialog-titlebar-close {
+	display: none;
+}
+
+.good{
+	background-color: #04AA6D;
+	color: white;
+}
+.warning{
+	background-color: #ff9800;
+	color: white;
+}
+.bad{
+	background-color: #f44336;;
+	color: white;
+}
+.nostatus{
+	background-color: #e7e7e7;
+	color: white;
+}
+#popupBox{
+	opacity: 0;
+	 transition: 1s;
 }

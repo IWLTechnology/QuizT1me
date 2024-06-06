@@ -11,22 +11,33 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'hbs');
 var server = http.createServer(app);
-const io = socket(server, {
+var io = socket(server, {
 	connectionStateRecovery: {}
 });
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
 	var params = req.query.raw ? {} : { seo: seo };
+		var counter = await db.getCounter();
+		if (counter) {
+			params.counter = counter.map((Counter) => Counter.counter);
+		}
 		res.render('index', params)
 })
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
 	console.log('a user connected');
 	socket.on('disconnect', () => {
 		console.log('a user diconnected');
 	});
-	socket.on('message', (data) => {
-		console.log('message: ' + data.message);
-		socket.emit('serverMessage', {message: data.message});
+	socket.on('play', async () => {
+		db.increaseCounter();
+		var counter = await db.getCounter();
+		if (counter) {
+			counter = counter.map((Counter) => Counter.counter);
+		}
+		io.emit('counterUpdate', {newValue: counter});
+	});
+	socket.on('message', (result) => {
+		console.log(result.message);
 	})
 })
 
