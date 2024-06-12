@@ -114,6 +114,23 @@ socket.on("counterUpdate", (data) => {
 socket.on("highscoresReturn", (data) => {
 	console.log(data);
 });
+function preloadSound() {
+	if (!createjs.Sound.initializeDefaultPlugins()) {
+	} else {
+		try {
+			createjs.Sound.addEventListener("fileload", playSound);
+			createjs.Sound.alternateExtensions = ["mp3"];
+			createjs.Sound.registerSounds(
+				[{ id: "wrong1", src: "/" }],
+				"./",
+			);
+		} catch (err) {}
+	}
+}
+
+function playSound(ev){
+	console.log(ev);
+}
 
 function init() {
 	document.getElementById("home").style.display = "block";
@@ -235,9 +252,8 @@ function timerUse(num) {
 			timeouts.timer = setInterval(function () {
 				if (timerActive == 1) {
 					timer = timer + 1;
-					console.log(timer);
 				}
-			}, 1000);
+			}, 100);
 			break;
 		case 1:
 			timerActive = 0;
@@ -252,20 +268,55 @@ function timerUse(num) {
 }
 
 function answered(provided) {
+	var letters = ["A", "B", "C", "D"];
+	var correctMotivation = [
+		"Well done!",
+		"Correct!",
+		"Congratulations!",
+		"Very good!",
+	];
+	var wrongMotivation = [
+		"Good try!",
+		"Better luck next time!",
+		"Your answer was incorrect, but that's okay.",
+	];
+	var highscoreMotivation = [
+		"Congrats, that's a new highscore!",
+		"Winner winner, chicken dinner! (or salad if you prefer). You recorded a new highscore!",
+		"You're on the charts! That's a new highscore!",
+		"Watch out! You may break our database! You recorded a new highscore!",
+	];
+	var nohighscoreMotiation = [
+		"You almost got it!",
+		"Play again. You'll definitely beat 'em",
+		"Just a little faster on those fingers.",
+		"Pratice makes perfect! Have another go.",
+	];
 	document.getElementById("question").style.display = "none";
 	timerUse(1);
 	if (
-		binaryToString(correctAnswers[chosenQuestions[currentQuestion]]) == provided
+		binaryToString(correctAnswers[chosenQuestions[currentQuestion]]) ==
+		letters[provided]
 	) {
-		console.log("Correct");
 		numcorrect += 1;
-		document.getElementById('correct').style.display = 'block';
+		document.getElementById("correctTitle").innerHTML =
+			correctMotivation[Math.floor(Math.random() * correctMotivation.length)];
+		document.getElementById("correct").style.display = "block";
 	} else {
-		console.log("Wrong");
+		document.getElementById("wrongTitle").innerHTML =
+			wrongMotivation[Math.floor(Math.random() * wrongMotivation.length)];
+		document.getElementById("correctAnswer").innerHTML =
+			answers[chosenQuestions[currentQuestion]][
+				letters.indexOf(
+					binaryToString(correctAnswers[chosenQuestions[currentQuestion]]),
+				)
+			];
+		document.getElementById("wrong").style.display = "block";
 	}
-	setTimeout(function(){
-		document.getElementById('correct').style.display = 'none';
-		if (nofq-1 != currentQuestion) {
+	setTimeout(function () {
+		document.getElementById("correct").style.display = "none";
+		document.getElementById("wrong").style.display = "none";
+		if (nofq - 1 != currentQuestion) {
 			if (true) {
 				currentQuestion += 1;
 				document.getElementById("questionName").innerHTML =
@@ -282,10 +333,28 @@ function answered(provided) {
 				timerUse(2);
 			} else {
 			}
-		}else{
-			console.log('finished');
+		} else {
+			if (false) {
+				document.getElementById("finishedTitle").innerHTML =
+					highscoreMotivation[
+						Math.floor(Math.random() * highscoreMotivation.length)
+					];
+			} else {
+				document.getElementById("finishedTitle").innerHTML =
+					nohighscoreMotiation[
+						Math.floor(Math.random() * nohighscoreMotiation.length)
+					];
+			}
+			document.getElementById("finishedNumCorrect").innerHTML = numcorrect;
+			document.getElementById("finishedNofq").innerHTML = nofq;
+			document.getElementById("finishedPercentage").innerHTML = (
+				(parseInt(numcorrect) / parseInt(nofq)) *
+				100
+			).toFixed(2);
+			document.getElementById("finishedTime").innerHTML = timer / 10;
+			document.getElementById("finished").style.display = "block";
 		}
-	}, 2000);
+	}, 3000);
 }
 
 function binaryToString(input) {

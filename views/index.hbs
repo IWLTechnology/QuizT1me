@@ -8,6 +8,7 @@
 			href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css"
 		/>
 		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="./soundjs-NEXT.combined.js"></script>
 		<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 		<link rel="stylesheet" href="/w3.css" />
 		<link rel="stylesheet" href="/style.css" />
@@ -158,36 +159,51 @@
 			<br />
 			<button
 				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-left w3-show-inline-block"
-				onclick="answered('A')" id="answer1"
+				onclick="answered(0)" id="answer1"
 			>
 				Answer1
 			</button>
 			<button
 				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
-				onclick="answered('B')" id="answer2"
+				onclick="answered(1)" id="answer2"
 			>
 				Answer2
 			</button>
 			<button
 				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
-				onclick="answered('C')" id="answer3"
+				onclick="answered(2)" id="answer3"
 			>
 				Answer3
 			</button>
 			<button
 				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
-				onclick="answered('D')" id="answer4"
+				onclick="answered(3)" id="answer4"
 			>
 				Answer4
 			</button>
 		</div>
 		<div id="correct" class="w3-center hide">
 			<br /><br />
-			<h1 class="alfa-slab-one" id="questionName">Correct!</h1>
+			<b><h1 class="alfa-slab-one" id="correctTitle"></h1></b>
 			<br />
 			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/2048px-Flat_tick_icon.svg.png">
 			<br>
-			<p>Your timer is paused. Continuing in 2 seconds.</p>
+		</div>
+		<div id="wrong" class="w3-center hide">
+			<br /><br />
+			<b><h1 class="alfa-slab-one" id="wrongTitle"></h1></b>
+			<br />
+			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/White_X_in_red_background.svg/2048px-White_X_in_red_background.svg.png">
+			<br>
+			<p>The correct answer was: <b id="correctAnswer"></b></p>
+		</div>
+		<div id="finished" class="w3-center hide">
+			<br /><br />
+			<b><h1 class="alfa-slab-one" id="finishedTitle"></h1></b>
+			<br>
+			<p>You scored <span id="finishedNumCorrect"></span> out of <span id="finishedNofq"></span>, or <span id="finishedPercentage"></span>%!</p><p>You completed your quiz in <span id="finishedTime"></span>s!</p><br>
+			<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+				onclick="highscores()">Show the current highscores</button>
 		</div>
 		<div id="credits" class="w3-bottom">
 			<br />
