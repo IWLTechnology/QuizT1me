@@ -47,3 +47,14 @@ h6{
 	opacity: 0;
 	 transition: 1s;
 }
+.questionButton{
+	width: 50%!important;
+	display: inline-block;
+}
+.tick{
+	width: 10%;
+	height: auto;
+}
+.full-height {
+	height: 100%;
+}

@@ -36,6 +36,10 @@ io.on('connection', async (socket) => {
 		}
 		io.emit('counterUpdate', {newValue: counter});
 	});
+	socket.on('requestHighscores', async () => {
+		var highscores = await db.getHighscores();
+		socket.emit('highscoresReturn', highscores);
+	});
 	socket.on('message', (result) => {
 		console.log(result.message);
 	})

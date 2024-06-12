@@ -17,7 +17,7 @@ dbWrapper
 		try {
 			if (!exists) {
 				await db.run(
-					"CREATE TABLE Highscores (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, name TEXT, correct TEXT)"
+					"CREATE TABLE Highscores (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, name TEXT, correct TEXT, nofq TEXT)"
 				);
 				await db.run(
 					"CREATE TABLE Counter (id INTEGER PRIMARY KEY AUTOINCREMENT, counter INTEGER)"
@@ -44,7 +44,7 @@ module.exports = {
 
 	addHighscore: async data => {
 		try {
-			return await db.all(`INSERT INTO Highscores (time, name, correct) VALUES ('${data.time}', '${data.name}', '${data.correct}')`);
+			return await db.all(`INSERT INTO Highscores (time, name, correct, nofq) VALUES ('${data.time}', '${data.name}', '${data.correct}','${data.nofq}')`);
 
 		} catch (dbError) {
 			// Database connection error

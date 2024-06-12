@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<base href="" />
-		<!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />-->
 		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link
 			rel="stylesheet"
@@ -48,7 +47,7 @@
 	<body onload="init()">
 		<div class="w3-top">
 			<div class="w3-bar w3-black">
-				<div id="popupBox" class="alfa-slab-one"><span id="popup"></span></div>
+				<div id="popupBox" class="alfa-slab-one hide"><span id="popup"></span><button style="opacity: 0!important;" class="w3-button w3-round-xxlarge w3-white w3-ripple">x</button></div>
 				<h3 style="" class="w3-bar-item w3-button w3-show-inline-block start">
 					<span class="logo"></span><span></span
 					><span class="nav-home"
@@ -151,6 +150,44 @@
 					</button>
 				</p>
 			</div>
+		</div>
+		<div id="question" class="w3-center hide">
+			<br /><br />
+			<h1 class="alfa-slab-one" id="questionName">QUESTION NAME</h1>
+			<hr class="w3-purple w3-border-purple" style="border-width: 3px" />
+			<br />
+			<button
+				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-left w3-show-inline-block"
+				onclick="answered('A')" id="answer1"
+			>
+				Answer1
+			</button>
+			<button
+				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
+				onclick="answered('B')" id="answer2"
+			>
+				Answer2
+			</button>
+			<button
+				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
+				onclick="answered('C')" id="answer3"
+			>
+				Answer3
+			</button>
+			<button
+				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
+				onclick="answered('D')" id="answer4"
+			>
+				Answer4
+			</button>
+		</div>
+		<div id="correct" class="w3-center hide">
+			<br /><br />
+			<h1 class="alfa-slab-one" id="questionName">Correct!</h1>
+			<br />
+			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/2048px-Flat_tick_icon.svg.png">
+			<br>
+			<p>Your timer is paused. Continuing in 2 seconds.</p>
 		</div>
 		<div id="credits" class="w3-bottom">
 			<br />
