@@ -58,3 +58,12 @@ h6{
 .full-height {
 	height: 100%;
 }
+#soundQueue{
+	display: none;
+}
+#playingSound{
+	display: none;
+}
+audio{
+	display: none;
+}

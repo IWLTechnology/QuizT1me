@@ -1,7 +1,8 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<base href="" />
+		<meta charset="UTF-8">
 		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link
 			rel="stylesheet"
@@ -106,9 +107,68 @@
 					</button>
 				</div>
 			</div>
+			<audio id="bg0">
+				<source src="/sound/8-bit-background-music-for-arcade-game-come-on-mario-164702.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="bg1">
+				<source src="/sound/circus.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="bg2">
+				<source src="/sound/meatball.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="bg3">
+				<source src="/sound/pixel.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="bg4">
+				<source src="/sound/Surfing.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="bg5">
+				<source src="/sound/thinking-time-148496.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="bg6">
+				<source src="/sound/quiz-countdown-194417.mp3" type="audio/mpeg">
+			</audio>
+			<audio id="bg7">
+				<source src="/sound/lemmings/02_-_Lemmings_-_DOS_-_Lemming_1.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg8">
+				<source src="/sound/sm/01_-_Super_Mario_Bros._-_NES_-_Above_Ground_BGM.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg9">
+				<source src="/sound/lemmings/04_-_Lemmings_-_DOS_-_Lemming_3.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg10">
+				<source src="/sound/lemmings/04_-_Lemmings_-_DOS_-_Lemming_3.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg11">
+				<source src="/sound/lemmings/06_-_Lemmings_-_DOS_-_Ten_Lemmings.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg12">
+				<source src="/sound/lemmings/07_-_Lemmings_-_DOS_-_Can-Can.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg13">
+				<source src="/sound/lemmings/08_-_Lemmings_-_DOS_-_Tim_1.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg14">
+				<source src="/sound/lemmings/15_-_Lemmings_-_DOS_-_Turkish_Rondo.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg15">
+				<source src="/sound/lemmings/16_-_Lemmings_-_DOS_-_Dance_of_the_Little_Swans.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg16">
+				<source src="/sound/lemmings/17_-_Lemmings_-_DOS_-_London_Bridge_Is_Falling_Down.ogg" type="audio/ogg">
+			</audio>
+			<audio id="bg17">
+				<source src="/sound/sm/04_-_Super_Mario_Bros._-_NES_-_Invincible_BGM.ogg" type="audio/ogg">
+			</audio>
 		</div>
 		<div id="settings" class="w3-center hide">
-			<h1>Settings</h1>
+			<h1 class="alfa-slab-one">Settings</h1>
+			<hr>
+			<input class="w3-check" id="music" type="checkbox" checked="checked">
+			<label>Enable Music</label><br>
+			<input class="w3-check" id="sfx" type="checkbox" checked="checked">
+			<label>Enable SFX</label>
 		</div>
 		<div id="beforeplay" class="w3-center hide">
 			<br /><br />
@@ -171,51 +231,50 @@
 			</button>
 			<button
 				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
-				onclick="answered(2)" id="answer3"
-			>
-				Answer3
-			</button>
-			<button
-				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
 				onclick="answered(3)" id="answer4"
 			>
 				Answer4
 			</button>
+			<button
+				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
+				onclick="answered(2)" id="answer3"
+			>
+				Answer3
+			</button>
 		</div>
 		<div id="correct" class="w3-center hide">
 			<br /><br />
-			<b><h1 class="alfa-slab-one" id="correctTitle"></h1></b>
+			<h1 class="alfa-slab-one" id="correctTitle">CORRECT MOTIVATION</h1>
 			<br />
-			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/2048px-Flat_tick_icon.svg.png">
+			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/2048px-Flat_tick_icon.svg.png" alt="Correct!">
 			<br>
 		</div>
 		<div id="wrong" class="w3-center hide">
 			<br /><br />
-			<b><h1 class="alfa-slab-one" id="wrongTitle"></h1></b>
+			<h1 class="alfa-slab-one" id="wrongTitle">WRONG MOTIVATION</h1>
 			<br />
-			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/White_X_in_red_background.svg/2048px-White_X_in_red_background.svg.png">
+			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/White_X_in_red_background.svg/2048px-White_X_in_red_background.svg.png" alt="Wrong!">
 			<br>
 			<p>The correct answer was: <b id="correctAnswer"></b></p>
 		</div>
 		<div id="finished" class="w3-center hide">
 			<br /><br />
-			<b><h1 class="alfa-slab-one" id="finishedTitle"></h1></b>
+			<h1 class="alfa-slab-one" id="finishedTitle">FINISHED MOTIVATION</h1>
 			<br>
 			<p>You scored <span id="finishedNumCorrect"></span> out of <span id="finishedNofq"></span>, or <span id="finishedPercentage"></span>%!</p><p>You completed your quiz in <span id="finishedTime"></span>s!</p><br>
 			<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
 				onclick="highscores()">Show the current highscores</button>
 		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 		<div id="credits" class="w3-bottom">
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
 			<div class="w3-bar w3-black w3-center">
 				<h6>
-					<div class="links">
 						<span
 							>Powered by
 							<a
@@ -228,11 +287,12 @@
 							for some code |
 							<a href="#" onclick="credits()">Learn More</a></span
 						>
-					</div>
 				</h6>
 			</div>
 		</div>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/script.js"></script>
+		<span id="soundQueue"></span>
+		<span id="playingSound">0</span>
 	</body>
 </html>

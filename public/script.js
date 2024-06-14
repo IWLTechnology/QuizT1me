@@ -3,7 +3,11 @@ var nofq = 10;
 var timeouts = {
 	popup: null,
 	timer: null,
+	bgmusic: null
 };
+var devel = [];
+var sfx = 1;
+var music = 1;
 var currentQuestion = 0;
 var timer = 0;
 var timerActive = 1;
@@ -119,20 +123,54 @@ function preloadSound() {
 	} else {
 		try {
 			createjs.Sound.addEventListener("fileload", playSound);
-			createjs.Sound.alternateExtensions = ["mp3"];
+			createjs.Sound.alternateExtensions = ["mp3", "wav", "ogg"];
 			createjs.Sound.registerSounds(
-				[{ id: "wrong1", src: "/" }],
-				"./",
+				[{ id: "w0", src: "/buzzer-4-183895.mp3" },
+				{ id: "w1", src: "/buzzer-15-187758.mp3" },
+				{ id: "w2", src: "/error-8-206492.mp3" },
+				{ id: "w3", src: "/Player.Die2.wav" },
+				{ id: "w4", src: "/Player.Die22.wav" },
+				 { id: "w5", src: "/sm/09_-_Super_Mario_Bros._-_NES_-_Killed.ogg" },
+				{ id: "c0", src: "/correct-156911.mp3" },
+				 { id: "c1", src: "/cute-level-up-2-189851.mp3" },
+				{ id: "c2", src: "/cute-level-up-3-189853.mp3" },
+				{ id: "c3", src: "/electric-chimes-87900.mp3" },
+				 { id: "qs", src: "/lets-start-the-quiz-b-39670.mp3" },
+				 { id: "nh1", src: "/Ultimate-Victory-WST010901.wav" },
+				 { id: "nh2", src: "/mixkit-medieval-show-fanfare-announcement-226.wav" }
+				],
+				"./sound",
 			);
 		} catch (err) {}
 	}
 }
 
 function playSound(ev){
-	console.log(ev);
+	devel.push("SoundJS:" + ev);
+}
+
+function playBgMusic(){
+	if(music == 1){
+		var rand = 'bg' + Math.floor(Math.random() * 18);
+		document.getElementById(rand).volume = 0.2;
+		document.getElementById(rand).currentTime = 0.000000000000000000000000000000000000000000000000000000000000000;
+		document.getElementById(rand).play();
+		timeouts.bgmusic = setTimeout(function(){
+			playBgMusic();
+		}, (document.getElementById(rand).duration*1000))
+	}
+}
+
+function stopBgMusic(){
+	window.clearTimeout(timeouts.bgmusic);
+	for(var i = 0; i < 18; i++){
+		document.getElementById("bg" + i).pause();
+		document.getElementById("bg" + i).currentTime = 0.000000000000000000000000000000000000000000000000000000000000000;
+	}
 }
 
 function init() {
+	preloadSound()
 	document.getElementById("home").style.display = "block";
 }
 
@@ -218,7 +256,62 @@ function popup(status, message) {
 	}, 10);
 }
 
+function soundPlay(toPlay){
+		if(document.getElementById('playingSound').innerHTML == '1'){
+			queue('add', toPlay);
+		}else{
+			var instance = createjs.Sound.play(toPlay);
+			playInit();
+			instance.on('complete', playFin);
+		}
+	}
+
+function playFin(){
+		document.getElementById('playingSound').innerHTML = '0';
+		queue('next', '');
+	}
+
+function playInit(){
+		document.getElementById('playingSound').innerHTML = '1'; 
+}
+
+function queue(m, v){
+		switch(m){
+			case 'next':
+				var y = document.getElementById('soundQueue').innerHTML.split(',');
+				y.shift();
+				document.getElementById('soundQueue').innerHTML = y;
+				queue('play', '');
+				break;
+			case 'clear':
+				document.getElementById('soundQueue').innerHTML = '';
+				break;
+			case 'add':
+				var x = document.getElementById('soundQueue').innerHTML.split(',')
+				x.push(v);
+				document.getElementById('soundQueue').innerHTML = x;
+				break;
+			case 'play': 
+				if(document.getElementById('playingSound').innerHTML == '0'){
+					if(document.getElementById('soundQueue').innerHTML.split(',')[0] != ''){
+	soundPlay(document.getElementById('soundQueue').innerHTML.split(',')[0]);
+				}else{
+
+				}
+				break;
+		}
+		}
+	}
+
 function startPlay() {
+	playBgMusic();
+	if(sfx == 1){
+		soundPlay('qs');
+	}
+	document.getElementById("nav2").innerHTML = "";
+	document.getElementById("nav2btn").setAttribute("onclick", "");
+	document.getElementById("nav3").innerHTML = "Quit";
+	document.getElementById("nav3btn").setAttribute("onclick", "window.location.reload()");
 	chosenQuestions = [];
 	var random;
 	numcorrect = 0;
@@ -240,7 +333,9 @@ function startPlay() {
 	document.getElementById("answer2").innerHTML = answers[chosenQuestions[0]][1];
 	document.getElementById("answer3").innerHTML = answers[chosenQuestions[0]][2];
 	document.getElementById("answer4").innerHTML = answers[chosenQuestions[0]][3];
+	document.getElementById("nav2").innerHTML = "Question 1 of " + nofq + "";
 	document.getElementById("question").style.display = "block";
+	document.body.addEventListener("keyup", keyPress);
 	timerUse(0);
 }
 
@@ -267,7 +362,44 @@ function timerUse(num) {
 	}
 }
 
+function keyPress(ev){
+	switch(ev.key){
+		case "1":
+		case "2":
+		case "3":
+		case "4":
+			answered((parseInt(ev.key) -1));
+			break;
+		case "A":
+			answered(0);
+			break;
+		case "B":
+			answered(1);
+			break;
+		case "C":
+			answered(2);
+			break;
+		case "D":
+			answered(3);
+			break;
+			case "a":
+				answered(0);
+				break;
+			case "b":
+				answered(1);
+				break;
+			case "c":
+				answered(2);
+				break;
+			case "d":
+				answered(3);
+				break;
+	}
+}
+//c is broken
+
 function answered(provided) {
+	document.body.removeEventListener("keyup", keyPress);
 	var letters = ["A", "B", "C", "D"];
 	var correctMotivation = [
 		"Well done!",
@@ -298,11 +430,17 @@ function answered(provided) {
 		binaryToString(correctAnswers[chosenQuestions[currentQuestion]]) ==
 		letters[provided]
 	) {
+		if(sfx == 1){
+			soundPlay('c' + (Math.floor(Math.random() * 4)));
+		}
 		numcorrect += 1;
 		document.getElementById("correctTitle").innerHTML =
 			correctMotivation[Math.floor(Math.random() * correctMotivation.length)];
 		document.getElementById("correct").style.display = "block";
 	} else {
+		if(sfx == 1){
+			soundPlay('w' + (Math.floor(Math.random() * 6)));
+		}
 		document.getElementById("wrongTitle").innerHTML =
 			wrongMotivation[Math.floor(Math.random() * wrongMotivation.length)];
 		document.getElementById("correctAnswer").innerHTML =
@@ -330,10 +468,20 @@ function answered(provided) {
 				document.getElementById("answer4").innerHTML =
 					answers[chosenQuestions[currentQuestion]][3];
 				document.getElementById("question").style.display = "block";
+				document.getElementById("nav2").innerHTML = "Question " + (currentQuestion + 1) + " of " + nofq + "";
+				document.body.addEventListener("keyup", keyPress);
 				timerUse(2);
 			} else {
 			}
 		} else {
+			stopBgMusic()
+			socket.emit('play');
+			document.getElementById("nav1").innerHTML = "Results";
+			document.getElementById("nav2").innerHTML = "";
+			document.getElementById("nav2btn").setAttribute("onclick", "");
+			document.getElementById("nav3").innerHTML = "Exit";
+			document.getElementById("nav3btn").setAttribute("onclick", "window.location.reload()");
+			document.title = "Results" + " |" + document.title.split("|")[1];
 			if (false) {
 				document.getElementById("finishedTitle").innerHTML =
 					highscoreMotivation[
@@ -393,6 +541,16 @@ function settings(mode) {
 			document.title = "Home" + " |" + document.title.split("|")[1];
 			break;
 		case 2:
+			if(document.getElementById('music').checked == true){
+				music = 1;
+			}else{
+				music = 0;
+			}
+			if(document.getElementById('sfx').checked == true){
+				sfx = 1;
+			}else{
+				sfx = 0;
+			}
 			document.getElementById("home").style.display = "block";
 			document.getElementById("settings").style.display = "none";
 			document.getElementById("nav1").innerHTML = "Home";
