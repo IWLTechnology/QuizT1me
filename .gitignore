@@ -1,6 +1,6 @@
-.*
+.*~*
+.breakpoints
 .upm
-.data
 .env
 .config
 .git
