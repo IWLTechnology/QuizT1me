@@ -116,7 +116,22 @@ socket.on("counterUpdate", (data) => {
 });
 
 socket.on("highscoresReturn", (data) => {
-	console.log(data);
+	document.getElementById('highscoreTable').innerHTML = `<tr><th>#of questions:</th><th>Current record holder:</th><th>Number of correct:</th><th>Time taken:</th></tr>`;
+	for(var i = 0; i < data.length; i++){
+		var time = (parseInt(data[i].time)/10).toString()
+		var percent = (
+			(parseInt(data[i].correct) / parseInt(data[i].nofq)) *
+			100
+		).toFixed(2);
+		document.getElementById('highscoreTable').innerHTML += `<tr><td>${data[i].nofq}</td><td>${data[i].name}</td><td>${data[i].correct} out of ${data[i].nofq} (${percent}%)</td><td>${time} seconds</td></tr>`;
+	}
+	$("#highscores-div").dialog({
+		dialogClass: "no-close",
+		closeOnEscape: false,
+		modal: true,
+		height: "auto",
+		width: "auto",
+	});
 });
 function preloadSound() {
 	if (!createjs.Sound.initializeDefaultPlugins()) {
@@ -170,6 +185,14 @@ function stopBgMusic(){
 }
 
 function init() {
+	document.getElementById('loading').style.display = "none";
+	document.getElementById('navbar').style.display = "block";
+	document.title = "Home" + " |" + document.title.split("|")[1];
+	var buttons = document.getElementsByClassName('questionButton');
+		for(var i = 0; i < buttons.length; i++){
+			buttons[i].style.height = (window.innerHeight - 300) / 2 + "px";
+		}
+	window.innerHeight
 	preloadSound()
 	document.getElementById("home").style.display = "block";
 }
@@ -205,10 +228,14 @@ function changeQuestions() {
 	$("#nofq-div").dialog({
 		dialogClass: "no-close",
 		closeOnEscape: false,
-		draggable: false,
+		modal: true,
 		height: "auto",
 		width: "auto",
 	});
+}
+
+function closeHighscores(){
+	$("#highscores-div").dialog("close");
 }
 
 function closenofq(num) {
@@ -303,11 +330,8 @@ function queue(m, v){
 		}
 	}
 
-function startPlay() {
+function afterTitle() {
 	playBgMusic();
-	if(sfx == 1){
-		soundPlay('qs');
-	}
 	document.getElementById("nav2").innerHTML = "";
 	document.getElementById("nav2btn").setAttribute("onclick", "");
 	document.getElementById("nav3").innerHTML = "Quit";
@@ -326,7 +350,7 @@ function startPlay() {
 			}
 		}
 	}
-	document.getElementById("beforeplay").style.display = "none";
+	document.getElementById("title").style.display = "none";
 	document.getElementById("questionName").innerHTML =
 		questions[chosenQuestions[0]];
 	document.getElementById("answer1").innerHTML = answers[chosenQuestions[0]][0];
@@ -337,6 +361,80 @@ function startPlay() {
 	document.getElementById("question").style.display = "block";
 	document.body.addEventListener("keyup", keyPress);
 	timerUse(0);
+}
+
+function startPlay() {
+
+	if(sfx == 1){
+		soundPlay('qs');
+	}
+	document.getElementById("beforeplay").style.display = "none";
+	document.getElementById("title").style.display = "block";
+	document.getElementById("nav2").innerHTML = "";
+	document.getElementById("nav2btn").setAttribute("onclick", "");
+	document.getElementById("nav3").innerHTML = "Quit";
+	document.getElementById("nav3btn").setAttribute("onclick", "window.location.reload()");
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '5%';
+	}, 250);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '10%';
+	}, 500);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '15%';
+	}, 750);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '20%';
+	}, 1000);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '25%';
+	}, 1250);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '30%';
+	}, 1500);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '35%';
+	}, 1750);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '40%';
+	}, 2000);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '45%';
+	}, 2250);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '50%';
+	}, 2500);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '55%';
+	}, 2750);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '60%';
+	}, 3000);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '65%';
+	}, 3250);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '70%';
+	}, 3500);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '75%';
+	}, 3750);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '80%';
+	}, 4000);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '85%';
+	}, 4250);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '90%';
+	}, 4500);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '95%';
+	}, 4750);
+	setTimeout(function(){
+		document.getElementById('progress').style.width = '100%';
+		afterTitle();
+	}, 5000);
 }
 
 function timerUse(num) {
@@ -412,18 +510,6 @@ function answered(provided) {
 		"Better luck next time!",
 		"Your answer was incorrect, but that's okay.",
 	];
-	var highscoreMotivation = [
-		"Congrats, that's a new highscore!",
-		"Winner winner, chicken dinner! (or salad if you prefer). You recorded a new highscore!",
-		"You're on the charts! That's a new highscore!",
-		"Watch out! You may break our database! You recorded a new highscore!",
-	];
-	var nohighscoreMotiation = [
-		"You almost got it!",
-		"Play again. You'll definitely beat 'em",
-		"Just a little faster on those fingers.",
-		"Pratice makes perfect! Have another go.",
-	];
 	document.getElementById("question").style.display = "none";
 	timerUse(1);
 	if (
@@ -476,34 +562,64 @@ function answered(provided) {
 		} else {
 			stopBgMusic()
 			socket.emit('play');
-			document.getElementById("nav1").innerHTML = "Results";
+			document.getElementById("nav1").innerHTML = "Loading Results...";
 			document.getElementById("nav2").innerHTML = "";
 			document.getElementById("nav2btn").setAttribute("onclick", "");
-			document.getElementById("nav3").innerHTML = "Exit";
+			document.getElementById("nav3").innerHTML = "Cancel";
 			document.getElementById("nav3btn").setAttribute("onclick", "window.location.reload()");
-			document.title = "Results" + " |" + document.title.split("|")[1];
-			if (false) {
-				document.getElementById("finishedTitle").innerHTML =
-					highscoreMotivation[
-						Math.floor(Math.random() * highscoreMotivation.length)
-					];
-			} else {
-				document.getElementById("finishedTitle").innerHTML =
-					nohighscoreMotiation[
-						Math.floor(Math.random() * nohighscoreMotiation.length)
-					];
-			}
-			document.getElementById("finishedNumCorrect").innerHTML = numcorrect;
-			document.getElementById("finishedNofq").innerHTML = nofq;
-			document.getElementById("finishedPercentage").innerHTML = (
-				(parseInt(numcorrect) / parseInt(nofq)) *
-				100
-			).toFixed(2);
-			document.getElementById("finishedTime").innerHTML = timer / 10;
-			document.getElementById("finished").style.display = "block";
+			document.title = "Loading Results..." + " |" + document.title.split("|")[1];
+			socket.emit('checkHighscores', {});
 		}
 	}, 3000);
 }
+
+socket.on("checkHighscoresReturn", (data) => {
+	var highscoreMotivation = [
+		"Congrats, that's a new highscore!",
+		"Winner winner, chicken dinner! (or salad if you prefer). You recorded a new highscore!",
+		"You're on the charts! That's a new highscore!",
+		"Watch out! You may break our database! You recorded a new highscore!",
+	];
+	var nohighscoreMotiation = [
+		"You almost got it! Try again and you'll cetainly beat the highscore.",
+		"Play again. You'll definitely beat 'em",
+		"Just a little faster on those fingers, and you'll be the new highscore!",
+		"Pratice makes perfect! Have another go. Maybe you'll get a new highscore this time.",
+	];
+	var highscore = data[nofq-10];
+	if (highscore.correct <= numcorrect) {
+		if(highscore.time > timer){
+		document.getElementById("finishedTitle").innerHTML =
+			highscoreMotivation[
+				Math.floor(Math.random() * highscoreMotivation.length)
+			];
+		}else{
+			document.getElementById("finishedTitle").innerHTML =
+				nohighscoreMotiation[
+					Math.floor(Math.random() * nohighscoreMotiation.length)
+				];
+		}
+	} else {
+		document.getElementById("finishedTitle").innerHTML =
+			nohighscoreMotiation[
+				Math.floor(Math.random() * nohighscoreMotiation.length)
+			];
+	}
+	document.getElementById("finishedNumCorrect").innerHTML = numcorrect;
+	document.getElementById("finishedNofq").innerHTML = nofq;
+	document.getElementById("finishedPercentage").innerHTML = (
+		(parseInt(numcorrect) / parseInt(nofq)) *
+		100
+	).toFixed(2);
+	document.getElementById("finishedTime").innerHTML = timer / 10;
+	document.getElementById("nav1").innerHTML = "Results";
+	document.getElementById("nav2").innerHTML = "";
+	document.getElementById("nav2btn").setAttribute("onclick", "");
+	document.getElementById("nav3").innerHTML = "Exit";
+	document.getElementById("nav3btn").setAttribute("onclick", "window.location.reload()");
+	document.title = "Results" + " |" + document.title.split("|")[1];
+	document.getElementById("finished").style.display = "block";
+});
 
 function binaryToString(input) {
 	const output = String.fromCharCode(
@@ -515,7 +631,30 @@ function binaryToString(input) {
 
 //socket.emit("play");
 
-function credits() {}
+function credits(m) {
+	switch(m){
+		case 0:
+			document.getElementById('home').style.display = "none";
+			document.getElementById('credits').style.display = "block";
+			document.title = "Credits" + " |" + document.title.split("|")[1];
+			document.getElementById("nav1").innerHTML = "Credits";
+			document.getElementById("nav2").innerHTML = "";
+			document.getElementById("nav2btn").setAttribute("onclick", "");
+			document.getElementById("nav3").innerHTML = "Close";
+			document.getElementById("nav3btn").setAttribute("onclick", "credits(1)");
+			break;
+		case 1:
+			document.getElementById('home').style.display = "block";
+			document.getElementById('credits').style.display = "none";
+			document.getElementById("nav1").innerHTML = "Home";
+			document.getElementById("nav3").innerHTML = "Settings";
+			document.getElementById("nav3btn").setAttribute("onclick", "settings(0)");
+			document.getElementById("nav2").innerHTML = "Play";
+			document.getElementById("nav2btn").setAttribute("onclick", "play()");
+			document.title = "Home" + " |" + document.title.split("|")[1];
+			break;
+	}
+}
 
 function settings(mode) {
 	switch (mode) {

@@ -25,6 +25,9 @@ dbWrapper
 				await db.run(
 					"INSERT INTO Counter (counter) VALUES (0)"
 				);
+				for(var num = 10; num < 21; num++){
+						await db.run(`INSERT INTO Highscores (time, name, correct, nofq) VALUES ('9999999999999999999999999999999999999999999999999', 'No Highscore', '0','${num}')`);
+				}
 			} else {
 
 			}

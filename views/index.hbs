@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en-GB">
 	<head>
 		<base href="" />
 		<meta charset="UTF-8">
+		<meta name="description" content="{{seo.description}}">
 		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link
 			rel="stylesheet"
@@ -44,10 +45,11 @@
 			rel="stylesheet"
 		/>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-		<title>Home {{seo.title}}</title>
+		<meta name="robots" content="">
+		<title>Loading... {{seo.title}}</title>
 	</head>
 	<body onload="init()">
-		<div class="w3-top">
+		<div class="w3-top hide" id="navbar">
 			<div class="w3-bar w3-black">
 				<div id="popupBox" class="alfa-slab-one hide"><span id="popup"></span><button style="opacity: 0!important;" class="w3-button w3-round-xxlarge w3-white w3-ripple">x</button></div>
 				<h3 style="" class="w3-bar-item w3-button w3-show-inline-block start">
@@ -77,6 +79,9 @@
 		<br />
 		<br />
 		<br />
+		<div id="loading" class="w3-center">
+			<h1 class="alfa-slab-one purple">Loading your experience...</h1>
+		</div>
 		<noscript>
 			<h1 class="purple w3-center alfa-slab-one">
 				This website requires JavaScript to work. Please enable javascript then
@@ -107,68 +112,30 @@
 					</button>
 				</div>
 			</div>
-			<audio id="bg0">
-				<source src="/sound/8-bit-background-music-for-arcade-game-come-on-mario-164702.mp3" type="audio/mpeg">
-			</audio>
-			<audio id="bg1">
-				<source src="/sound/circus.mp3" type="audio/mpeg">
-			</audio>
-			<audio id="bg2">
-				<source src="/sound/meatball.mp3" type="audio/mpeg">
-			</audio>
-			<audio id="bg3">
-				<source src="/sound/pixel.mp3" type="audio/mpeg">
-			</audio>
-			<audio id="bg4">
-				<source src="/sound/Surfing.mp3" type="audio/mpeg">
-			</audio>
-			<audio id="bg5">
-				<source src="/sound/thinking-time-148496.mp3" type="audio/mpeg">
-			</audio>
-			<audio id="bg6">
-				<source src="/sound/quiz-countdown-194417.mp3" type="audio/mpeg">
-			</audio>
-			<audio id="bg7">
-				<source src="/sound/lemmings/02_-_Lemmings_-_DOS_-_Lemming_1.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg8">
-				<source src="/sound/sm/01_-_Super_Mario_Bros._-_NES_-_Above_Ground_BGM.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg9">
-				<source src="/sound/lemmings/04_-_Lemmings_-_DOS_-_Lemming_3.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg10">
-				<source src="/sound/lemmings/04_-_Lemmings_-_DOS_-_Lemming_3.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg11">
-				<source src="/sound/lemmings/06_-_Lemmings_-_DOS_-_Ten_Lemmings.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg12">
-				<source src="/sound/lemmings/07_-_Lemmings_-_DOS_-_Can-Can.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg13">
-				<source src="/sound/lemmings/08_-_Lemmings_-_DOS_-_Tim_1.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg14">
-				<source src="/sound/lemmings/15_-_Lemmings_-_DOS_-_Turkish_Rondo.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg15">
-				<source src="/sound/lemmings/16_-_Lemmings_-_DOS_-_Dance_of_the_Little_Swans.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg16">
-				<source src="/sound/lemmings/17_-_Lemmings_-_DOS_-_London_Bridge_Is_Falling_Down.ogg" type="audio/ogg">
-			</audio>
-			<audio id="bg17">
-				<source src="/sound/sm/04_-_Super_Mario_Bros._-_NES_-_Invincible_BGM.ogg" type="audio/ogg">
-			</audio>
+			<div id="creditsBar" class="w3-bottom">
+				<div class="w3-bar w3-black w3-center">
+					<h6>
+							<span
+								>Powered by
+								<a
+									target="_blank"
+									href="https://www.w3schools.com/w3css/w3css_intro.asp"
+									>W3.CSS</a
+								>
+								|
+								<a href="#" onclick="credits(0)">Learn More</a></span
+							>
+					</h6>
+				</div>
+			</div>
 		</div>
 		<div id="settings" class="w3-center hide">
 			<h1 class="alfa-slab-one">Settings</h1>
 			<hr>
 			<input class="w3-check" id="music" type="checkbox" checked="checked">
-			<label>Enable Music</label><br>
+			<span>Enable Music</span><br>
 			<input class="w3-check" id="sfx" type="checkbox" checked="checked">
-			<label>Enable SFX</label>
+			<span>Enable SFX</span>
 		</div>
 		<div id="beforeplay" class="w3-center hide">
 			<br /><br />
@@ -179,7 +146,7 @@
 				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
 				onclick="changeQuestions()"
 			>
-				Change the number of questions you will have in your quiz
+				Set the amount of questions
 			</button>
 			<button
 				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
@@ -187,7 +154,7 @@
 			>
 				Show highscores
 			</button>
-			<div id="nofq-div" style="display: none!important;" title="Change the number of questions">
+			<div id="nofq-div" style="display: none!important;" title="Set the amount of questions">
 				<p>
 					Please enter a value from 10 to 20:
 					<input
@@ -212,39 +179,55 @@
 				</p>
 			</div>
 		</div>
-		<div id="question" class="w3-center hide">
-			<br /><br />
-			<h1 class="alfa-slab-one" id="questionName">QUESTION NAME</h1>
-			<hr class="w3-purple w3-border-purple" style="border-width: 3px" />
+		<div id="highscores-div" style="display: none!important;" title="Highscores" class="w3-center">
+			<table id="highscoreTable">
+			</table>
+			<br>
+			<button
+					class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple w3-center"
+					onclick="closeHighscores()"
+				>
+					Close
+				</button>
+		</div>
+		<div id="title" class="w3-center hide">
 			<br />
+			<h1 class="alfa-slab-one title">General Knowledge Quiz</h1>
+			<div class="w3-border w3-bottom">
+				<div class="w3-purple" id="progress" style="height:24px;width:1%"></div>
+			</div>
+		</div>
+		<div id="question" class="w3-center hide">
+			<br />
+			<h1 class="alfa-slab-one" id="questionName">QUESTION NAME</h1>
 			<button
-				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-left w3-show-inline-block"
-				onclick="answered(0)" id="answer1"
+				class="w3-btn w3-ripple questionButton w3-right"
+				onclick="answered(1)" id="answerb2"
 			>
-				Answer1
+				<h3 id="answer2">Answer2</h3>
 			</button>
 			<button
-				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
-				onclick="answered(1)" id="answer2"
+				class="w3-btn w3-ripple questionButton w3-right"
+				onclick="answered(0)" id="answerb1"
 			>
-				Answer2
+				<h3 id="answer1">Answer1</h3>
 			</button>
 			<button
-				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
-				onclick="answered(3)" id="answer4"
+				class="w3-btn w3-ripple questionButton w3-right"
+				onclick="answered(3)" id="answerb4"
 			>
-				Answer4
+				<h3 id="answer4">Answer4</h3>
 			</button>
 			<button
-				class="w3-purple w3-btn w3-border w3-border-purple w3-ripple questionButton w3-right w3-show-inline-block"
-				onclick="answered(2)" id="answer3"
+				class="w3-btn w3-ripple questionButton w3-right"
+				onclick="answered(2)" id="answerb3"
 			>
-				Answer3
+				<h3 id="answer3">Answer3</h3>
 			</button>
 		</div>
 		<div id="correct" class="w3-center hide">
-			<br /><br />
-			<h1 class="alfa-slab-one" id="correctTitle">CORRECT MOTIVATION</h1>
+			<br />
+			<h1 class="alfa-slab-one w3-center w3-hover-none w3-btn w3-padding" id="correctTitle">CORRECT MOTIVATION</h1>
 			<br />
 			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/2048px-Flat_tick_icon.svg.png" alt="Correct!">
 			<br>
@@ -265,34 +248,97 @@
 			<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
 				onclick="highscores()">Show the current highscores</button>
 		</div>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<div id="credits" class="w3-bottom">
-			<div class="w3-bar w3-black w3-center">
-				<h6>
-						<span
-							>Powered by
-							<a
-								target="_blank"
-								href="https://www.w3schools.com/w3css/w3css_intro.asp"
-								>W3.CSS</a
-							>
-							| Credit to
-							<a target="_blank" href="https://www.w3schools.com/">w3schools</a>
-							for some code |
-							<a href="#" onclick="credits()">Learn More</a></span
-						>
-				</h6>
-			</div>
+		<div id="credits" class="w3-center hide purple">
+			<br /><br />
+			<h1 class="alfa-slab-one">Credits</h1>
+			<hr>
+			<p><b>Thanks to:</b>
+			<ul class="w3-ul">
+				<li><a href="https://pixabay.com" target="_blank">Pixabay</a> for some sounds</li>
+				<li><a href="https://w3schools.com" target="_blank">W3schools</a> for some code</li>
+				<li><a href="https://butlerjs.glitch.me" target="_blank">ButlerJS</a> (a wip project by me) for some code (mainly the sound processing)</li>
+				<li><a href="https://www.w3schools.com/w3css/w3css_intro.asp" target="_blank">W3.CSS</a> (by w3schools) for the CSS engine</li>
+				<li><a href="https://jquery.com/" target="_blank">JQuery</a> (which is used by JQuery UI) for the JavaScript engine used to display the Number of Questions and the Highscores popups.</li>
+				<li><a href="https://jqueryui.com/" target="_blank">JQuery UI</a> (which is uses JQuery) for the JavaScript engine used by JQuery UI.</li>
+				<li><a href="https://fonts.google.com/" target="_blank">Google Fonts</a> for various fonts used on this site.</li>
+				<li><a href="https://stackoverflow.com/" target="_blank">Stack Overflow</a> (a programmer's best friend) for various code snippets used in this site.</li>
+				<li><a href="httpskahoot.it/" target="_blank">Kahoot.it</a> for the colour schemem for the buttons</li>
+			</ul><br>
+				<b>Music Credits:</b><br>
+			<ul class="w3-ul">
+				<li>Pixel Peeker Polka – faster by Kevin MacLeod | https://incompetech.com/<br>Music promoted by https://www.chosic.com/free-music/all/<br>Creative Commons CC BY 3.0<br><a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">https://creativecommons.org/licenses/by/3.0/</a></li>
+<li>Meatball Parade by Kevin MacLeod | https://incompetech.com/<br>Music promoted by https://www.chosic.com/free-music/all/<br>Creative Commons CC BY 3.0<br><a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">https://creativecommons.org/licenses/by/3.0/</a></li>
+<li>Circus Theme (Entry of the Gladiators) – Trap Version by Alexander Nakarada | https://www.serpentsoundstudios.com<br>Music promoted on https://www.chosic.com/free-music/all/<br>Creative Commons Attribution 4.0 International (CC BY 4.0)<br>
+<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">https://creativecommons.org/licenses/by/4.0/</a></li>
+<li>Credit to <a href="https://mixkit.co/free-sound-effects/win/" target="_blank">https://mixkit.co/free-sound-effects/win/</a> and <a href="https://www.videvo.net/search/?q=victory&mode=music&type[0]=free" target="_blank">https://www.videvo.net/search/?q=victory&mode=music&type[0]=free</a> for the new highscore music.</li>
+				<li>Credit to <a href="https://scratch.mit.edu" target="_blank">https://scratch.mit.edu</a> for some of the sound effects.</li>
+			</ul>
+		</p>
 		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/script.js"></script>
 		<span id="soundQueue"></span>
 		<span id="playingSound">0</span>
+		<div class="hide" id="audio"><audio id="bg0">
+			<source src="/sound/8-bit-background-music-for-arcade-game-come-on-mario-164702.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="bg1" preload="auto">
+			<source src="/sound/circus.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="bg2" preload="auto">
+			<source src="/sound/meatball.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="bg3" preload="auto">
+			<source src="/sound/pixel.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="bg4" preload="auto">
+			<source src="/sound/Surfing.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="bg5" preload="auto">
+			<source src="/sound/thinking-time-148496.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="bg6" preload="auto">
+			<source src="/sound/quiz-countdown-194417.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="bg7" preload="auto">
+			<source src="/sound/lemmings/02_-_Lemmings_-_DOS_-_Lemming_1.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg8" preload="auto">
+			<source src="/sound/sm/01_-_Super_Mario_Bros._-_NES_-_Above_Ground_BGM.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg9" preload="auto">
+			<source src="/sound/lemmings/04_-_Lemmings_-_DOS_-_Lemming_3.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg10" preload="auto">
+			<source src="/sound/lemmings/04_-_Lemmings_-_DOS_-_Lemming_3.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg11" preload="auto">
+			<source src="/sound/lemmings/06_-_Lemmings_-_DOS_-_Ten_Lemmings.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg12" preload="auto">
+			<source src="/sound/lemmings/07_-_Lemmings_-_DOS_-_Can-Can.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg13" preload="auto">
+			<source src="/sound/lemmings/08_-_Lemmings_-_DOS_-_Tim_1.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg14" preload="auto">
+			<source src="/sound/lemmings/15_-_Lemmings_-_DOS_-_Turkish_Rondo.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg15" preload="auto">
+			<source src="/sound/lemmings/16_-_Lemmings_-_DOS_-_Dance_of_the_Little_Swans.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg16" preload="auto">
+			<source src="/sound/lemmings/17_-_Lemmings_-_DOS_-_London_Bridge_Is_Falling_Down.ogg" type="audio/ogg">
+		</audio>
+		<audio id="bg17" preload="auto">
+			<source src="/sound/sm/04_-_Super_Mario_Bros._-_NES_-_Invincible_BGM.ogg" type="audio/ogg">
+		</audio></div>
 	</body>
 </html>

@@ -48,8 +48,10 @@ h6{
 	 transition: 1s;
 }
 .questionButton{
-	width: 50%!important;
-	display: inline-block;
+	color: white;
+	margin: 0.25%;
+	border-radius: 6px;
+	width: 49.5%!important;
 }
 .tick{
 	width: 10%;
@@ -66,4 +68,39 @@ h6{
 }
 audio{
 	display: none;
+}
+hr{
+	border-color: #9c27b0;
+	border-width: 3px; 
+}
+
+#answerb1{
+	background-color: #dc012b;
+}
+#answerb2{
+	background-color: #0c4cc8;
+}
+#answerb3{
+	background-color: #d08f01;
+}
+#answerb4{
+	background-color: #228103;
+}
+#questionName{
+	margin-left: 0.25%;
+	margin-right: 0.25%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	width: 99.5%;
+	padding: 15px;
+	border-radius: 6px;
+	/*background-color: #9c27b0*/
+	color: black;
+}
+.title{
+	font-size: 500%;
+}
+table, th, td {
+	border: 1px solid!important;
+	border-color: #9c27b0!important;
 }
