@@ -1,50 +1,42 @@
 <!DOCTYPE HTML>
 <html lang="en-GB">
 	<head>
-		<base href="" />
+		<base href="">
 		<meta charset="UTF-8">
 		<meta name="description" content="{{seo.description}}">
 		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<link
 			rel="stylesheet"
-			href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css"
-		/>
+			href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
 		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 		<script src="./soundjs-NEXT.combined.js"></script>
 		<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/w3.css" />
-		<link rel="stylesheet" href="/style.css" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="/w3.css">
+		<link rel="stylesheet" href="/style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link
 			href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet">
 		<link
 			href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet">
 		<link
 			href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet">
 		<link
 			href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet">
 		<link
 			href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet">
 		<link
 			href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap"
-			rel="stylesheet"
-		/>
+			rel="stylesheet">
 		<link
 			href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-			rel="stylesheet"
-		/>
-		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+			rel="stylesheet">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<meta name="robots" content="">
 		<title>Loading... {{seo.title}}</title>
 	</head>
@@ -76,9 +68,9 @@
 				</h3>
 			</div>
 		</div>
-		<br />
-		<br />
-		<br />
+		<br>
+		<br>
+		<br>
 		<div id="loading" class="w3-center">
 			<h1 class="alfa-slab-one purple">Loading your experience...</h1>
 		</div>
@@ -94,9 +86,9 @@
 				<h3 class="purple">
 					people have played QuizT1me since the project started!
 				</h3>
-				<br />
-				<br />
-				<br />
+				<br>
+				<br>
+				<br>
 				<div class="w3-show-inline-block">
 					<button
 						class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
@@ -109,6 +101,12 @@
 						onclick="settings(0)"
 					>
 						Settings
+					</button>
+					<button
+						class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+						onclick="instructions(0)"
+					>
+						Show Instructions
 					</button>
 				</div>
 			</div>
@@ -130,18 +128,25 @@
 			</div>
 		</div>
 		<div id="settings" class="w3-center hide">
+			<br>
 			<h1 class="alfa-slab-one">Settings</h1>
 			<hr>
 			<input class="w3-check" id="music" type="checkbox" checked="checked">
 			<span>Enable Music</span><br>
 			<input class="w3-check" id="sfx" type="checkbox" checked="checked">
 			<span>Enable SFX</span>
+			<div class="w3-bottom base-bar">
+				<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+					onclick="settings(1)">Cancel</button>
+				<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+					onclick="settings(2)">Apply</button>
+				</div>
 		</div>
 		<div id="beforeplay" class="w3-center hide">
-			<br /><br />
+			<br>
 			<h1 class="alfa-slab-one">Play</h1>
-			<hr class="w3-purple w3-border-purple" style="border-width: 3px" />
-			<br />
+			<hr class="w3-purple w3-border-purple" style="border-width: 3px">
+			<br>
 			<button
 				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
 				onclick="changeQuestions()"
@@ -154,6 +159,20 @@
 			>
 				Show highscores
 			</button>
+			<div class="w3-bottom base-bar">
+			<button
+				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+				onclick="exitPlay()"
+			>
+				Go Back
+			</button>
+			<button
+				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+				onclick="startPlay()"
+			>
+				Play
+			</button>
+			</div>
 			<div id="nofq-div" style="display: none!important;" title="Set the amount of questions">
 				<p>
 					Please enter a value from 10 to 20:
@@ -164,7 +183,7 @@
 						max="20"
 						value="10"
 						id="nofq-input"
-					/><br><button
+					><br><button
 						class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
 						onclick="closenofq(0)"
 					>
@@ -190,66 +209,108 @@
 					Close
 				</button>
 		</div>
+		<div id="name-div" style="display: none!important;" title="Please enter your initials" class="w3-center">
+			<p>Please enter your initials to record for a new highscore:</p>
+			<input id="nameInput" class="w3-input" placeholder="Please enter your initials" type="text"><br><br>
+			<button
+				class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple w3-center"
+				onclick="closeName(0)"
+			>
+				Don't record a highscore
+			</button>
+			<button
+					class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple w3-center"
+					onclick="closeName(1)"
+				>
+					Submit
+				</button>
+		</div>
 		<div id="title" class="w3-center hide">
-			<br />
+			<br>
 			<h1 class="alfa-slab-one title">General Knowledge Quiz</h1>
 			<div class="w3-border w3-bottom">
 				<div class="w3-purple" id="progress" style="height:24px;width:1%"></div>
 			</div>
 		</div>
 		<div id="question" class="w3-center hide">
-			<br />
+			<br>
 			<h1 class="alfa-slab-one" id="questionName">QUESTION NAME</h1>
 			<button
 				class="w3-btn w3-ripple questionButton w3-right"
 				onclick="answered(1)" id="answerb2"
 			>
-				<h3 id="answer2">Answer2</h3>
+				<h3 id="answer2" class="answerText">Answer2</h3>
 			</button>
 			<button
 				class="w3-btn w3-ripple questionButton w3-right"
 				onclick="answered(0)" id="answerb1"
 			>
-				<h3 id="answer1">Answer1</h3>
+				<h3 id="answer1" class="answerText">Answer1</h3>
 			</button>
 			<button
 				class="w3-btn w3-ripple questionButton w3-right"
 				onclick="answered(3)" id="answerb4"
 			>
-				<h3 id="answer4">Answer4</h3>
+				<h3 id="answer4" class="answerText">Answer4</h3>
 			</button>
 			<button
 				class="w3-btn w3-ripple questionButton w3-right"
 				onclick="answered(2)" id="answerb3"
 			>
-				<h3 id="answer3">Answer3</h3>
+				<h3 id="answer3" class="answerText">Answer3</h3>
 			</button>
 		</div>
 		<div id="correct" class="w3-center hide">
-			<br />
+			<br>
 			<h1 class="alfa-slab-one w3-center w3-hover-none w3-btn w3-padding" id="correctTitle">CORRECT MOTIVATION</h1>
-			<br />
+			<br>
 			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/2048px-Flat_tick_icon.svg.png" alt="Correct!">
 			<br>
 		</div>
+		<div id="instructions" class="w3-center hide">
+			<br>
+			<h1 class="alfa-slab-one w3-center">Instructions</h1>
+			<hr>
+			<p>
+			<ol class="w3-ul">
+				<li><b>1)</b> Once you have read this, click the close button below.</li>
+				<li><b>2)</b> Click the settings button if you wish to turn music and sound effects on or off, if so, choose your preferred settings then click 'apply', 'cancel' to cancel.</li>
+				<li><b>3)</b> Click the play button</li>
+				<li><b>4)</b> If you wish to view the current highscores, click the 'Show highscores' button, then click the 'close' button after you are finished.</li>
+				<li><b>5)</b> If you wish to change the number of questions you take in your quiz, click the 'set the amount of questions' button, then click 'apply', if you change your mind, click 'keep it a 10', which will leave the number of questions at 10, the default.</li>
+				<li><b>6)</b> Once you are ready, click the 'play' button.</li>
+				<li><b>7)</b> When a question is displayed, click on the answer you want to choose, or click a,b,c,d on the keyboard corresponding to the answers, or 1,2,3,4 (1 is the same as a, 2 the same as b, etc.)</li>
+				<li><b>8)</b> Keep doing this until you have finished the quiz.</li>
+				<li><b>9)</b> The next screen will give you your results. If yo got a new highscore, a prompt will appear asking for your initials to be provided on the highscores register. If you do not want to record a highscore, click the 'Don't record a highscore' button. Otherwise, enter your initials and press the 'Submit' button.</li>
+				<li><b>10)</b> If you wish, you can view the current highscores by clicking the 'Show the current highscores' button. Otherwise, click the Exit button to play again (you will have to re-enter your sound settings and your number of preferred questions).</li>
+				<li><b>11)</b> Enjoy!</li>
+			</ol></p>
+			<div class="w3-bottom base-bar">
+				<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+					onclick="instructions(1)">Close</button>
+				</div>
+			<br>
+		</div>
 		<div id="wrong" class="w3-center hide">
-			<br /><br />
+			<br><br>
 			<h1 class="alfa-slab-one" id="wrongTitle">WRONG MOTIVATION</h1>
-			<br />
+			<br>
 			<img class="tick" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/White_X_in_red_background.svg/2048px-White_X_in_red_background.svg.png" alt="Wrong!">
 			<br>
 			<p>The correct answer was: <b id="correctAnswer"></b></p>
 		</div>
 		<div id="finished" class="w3-center hide">
-			<br /><br />
+			<br><br>
 			<h1 class="alfa-slab-one" id="finishedTitle">FINISHED MOTIVATION</h1>
 			<br>
 			<p>You scored <span id="finishedNumCorrect"></span> out of <span id="finishedNofq"></span>, or <span id="finishedPercentage"></span>%!</p><p>You completed your quiz in <span id="finishedTime"></span>s!</p><br>
 			<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
 				onclick="highscores()">Show the current highscores</button>
+			<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+				onclick="window.location.reload()">Exit</button>
 		</div>
 		<div id="credits" class="w3-center hide purple">
-			<br /><br />
+			<br><br>
 			<h1 class="alfa-slab-one">Credits</h1>
 			<hr>
 			<p><b>Thanks to:</b>
@@ -270,18 +331,21 @@
 <li>Meatball Parade by Kevin MacLeod | https://incompetech.com/<br>Music promoted by https://www.chosic.com/free-music/all/<br>Creative Commons CC BY 3.0<br><a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">https://creativecommons.org/licenses/by/3.0/</a></li>
 <li>Circus Theme (Entry of the Gladiators) – Trap Version by Alexander Nakarada | https://www.serpentsoundstudios.com<br>Music promoted on https://www.chosic.com/free-music/all/<br>Creative Commons Attribution 4.0 International (CC BY 4.0)<br>
 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">https://creativecommons.org/licenses/by/4.0/</a></li>
-<li>Credit to <a href="https://mixkit.co/free-sound-effects/win/" target="_blank">https://mixkit.co/free-sound-effects/win/</a> and <a href="https://www.videvo.net/search/?q=victory&mode=music&type[0]=free" target="_blank">https://www.videvo.net/search/?q=victory&mode=music&type[0]=free</a> for the new highscore music.</li>
+<li>Credit to <a href="https://mixkit.co/free-sound-effects/win/" target="_blank">https://mixkit.co/free-sound-effects/win/</a> and <a href="https://www.videvo.net/search/?q=victory&mode=music" target="_blank">https://www.videvo.net/search/?q=victory&mode=music&type[0]=free</a> for the new highscore music.</li>
 				<li>Credit to <a href="https://scratch.mit.edu" target="_blank">https://scratch.mit.edu</a> for some of the sound effects.</li>
 			</ul>
-		</p>
+			<div class="w3-bottom base-bar">
+			<button class="w3-purple w3-btn w3-round-xlarge w3-border w3-border-purple w3-ripple"
+				onclick="credits(1)">Close</button>
+			</div>
 		</div>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/script.js"></script>
 		<span id="soundQueue"></span>

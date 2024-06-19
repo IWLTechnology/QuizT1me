@@ -100,7 +100,17 @@ hr{
 .title{
 	font-size: 500%;
 }
-table, th, td {
-	border: 1px solid!important;
+th, td {
+	border: 2px solid!important;
 	border-color: #9c27b0!important;
+	padding: 8px;
+}
+table{
+	border-collapse: collapse;
+}
+.answerText{
+	text-wrap: wrap!important;
+}
+.base-bar{
+	background-color: rgba(160,160,160,0.7);
 }

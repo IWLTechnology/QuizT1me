@@ -26,7 +26,7 @@ dbWrapper
 					"INSERT INTO Counter (counter) VALUES (0)"
 				);
 				for(var num = 10; num < 21; num++){
-						await db.run(`INSERT INTO Highscores (time, name, correct, nofq) VALUES ('9999999999999999999999999999999999999999999999999', 'No Highscore', '0','${num}')`);
+						await db.run(`INSERT INTO Highscores (time, name, correct, nofq) VALUES ('999999999', 'No Highscore', '0','${num}')`);
 				}
 			} else {
 
@@ -47,10 +47,12 @@ module.exports = {
 
 	addHighscore: async data => {
 		try {
-			return await db.all(`INSERT INTO Highscores (time, name, correct, nofq) VALUES ('${data.time}', '${data.name}', '${data.correct}','${data.nofq}')`);
+			return await db.all(`UPDATE Highscores
+SET name = '${data.name}', correct = '${data.correct}', time = '${data.time}'
+WHERE nofq = '${data.nofq}';
+`);
 
 		} catch (dbError) {
-			// Database connection error
 			console.error(dbError);
 		}
 	},
@@ -61,7 +63,6 @@ module.exports = {
 				"UPDATE Counter SET counter = counter + 1"
 			);
 		} catch (dbError) {
-			// Database connection error
 			console.error(dbError);
 		}
 	},
@@ -69,7 +70,6 @@ module.exports = {
 		try {
 			return await db.all("SELECT counter from Counter");
 		} catch (dbError) {
-			// Database connection error
 			console.error(dbError);
 		}
 	},

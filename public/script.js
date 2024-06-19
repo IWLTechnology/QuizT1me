@@ -149,10 +149,9 @@ function preloadSound() {
 				{ id: "c0", src: "/correct-156911.mp3" },
 				 { id: "c1", src: "/cute-level-up-2-189851.mp3" },
 				{ id: "c2", src: "/cute-level-up-3-189853.mp3" },
-				{ id: "c3", src: "/electric-chimes-87900.mp3" },
 				 { id: "qs", src: "/lets-start-the-quiz-b-39670.mp3" },
-				 { id: "nh1", src: "/Ultimate-Victory-WST010901.wav" },
-				 { id: "nh2", src: "/mixkit-medieval-show-fanfare-announcement-226.wav" }
+				 { id: "nh0", src: "/Ultimate-Victory-WST010901.wav" },
+				 { id: "nh1", src: "/mixkit-medieval-show-fanfare-announcement-226.wav" }
 				],
 				"./sound",
 			);
@@ -517,7 +516,7 @@ function answered(provided) {
 		letters[provided]
 	) {
 		if(sfx == 1){
-			soundPlay('c' + (Math.floor(Math.random() * 4)));
+			soundPlay('c' + (Math.floor(Math.random() * 3)));
 		}
 		numcorrect += 1;
 		document.getElementById("correctTitle").innerHTML =
@@ -576,9 +575,9 @@ function answered(provided) {
 socket.on("checkHighscoresReturn", (data) => {
 	var highscoreMotivation = [
 		"Congrats, that's a new highscore!",
-		"Winner winner, chicken dinner! (or salad if you prefer). You recorded a new highscore!",
+		"Winner winner, chicken dinner! (or salad if you prefer). You got a new highscore!",
 		"You're on the charts! That's a new highscore!",
-		"Watch out! You may break our database! You recorded a new highscore!",
+		"Watch out! You may break our database! You got a new highscore!",
 	];
 	var nohighscoreMotiation = [
 		"You almost got it! Try again and you'll cetainly beat the highscore.",
@@ -587,23 +586,39 @@ socket.on("checkHighscoresReturn", (data) => {
 		"Pratice makes perfect! Have another go. Maybe you'll get a new highscore this time.",
 	];
 	var highscore = data[nofq-10];
-	if (highscore.correct <= numcorrect) {
-		if(highscore.time > timer){
+	if (numcorrect > highscore.correct) {
+			soundPlay("nh" + Math.floor(Math.random()*2));
+			$("#name-div").dialog({
+				dialogClass: "no-close",
+				closeOnEscape: false,
+				modal: true,
+				height: "auto",
+				width: "auto",
+			});
 		document.getElementById("finishedTitle").innerHTML =
 			highscoreMotivation[
 				Math.floor(Math.random() * highscoreMotivation.length)
 			];
-		}else{
-			document.getElementById("finishedTitle").innerHTML =
-				nohighscoreMotiation[
-					Math.floor(Math.random() * nohighscoreMotiation.length)
-				];
-		}
 	} else {
+		if(numcorrect == highscore.correct && timer < highscore.time){
+			soundPlay("nh" + Math.floor(Math.random()*2));
+			$("#name-div").dialog({
+				dialogClass: "no-close",
+				closeOnEscape: false,
+				modal: true,
+				height: "auto",
+				width: "auto",
+			});
+			document.getElementById("finishedTitle").innerHTML =
+			highscoreMotivation[
+				Math.floor(Math.random() * highscoreMotivation.length)
+			];
+		}else{
 		document.getElementById("finishedTitle").innerHTML =
 			nohighscoreMotiation[
 				Math.floor(Math.random() * nohighscoreMotiation.length)
 			];
+		}
 	}
 	document.getElementById("finishedNumCorrect").innerHTML = numcorrect;
 	document.getElementById("finishedNofq").innerHTML = nofq;
@@ -629,7 +644,54 @@ function binaryToString(input) {
 	return output;
 }
 
-//socket.emit("play");
+function closeName(mode){
+	switch(mode){
+		case 0:
+			$("#name-div").dialog("close");
+			popup("warning", "A highscore was not recorded. You missed out on the opportinity of you life.");
+			break;
+		case 1:
+			var name = document.getElementById('nameInput').value;
+			if(name != "" && name != "NaN" && name != NaN && name != undefined && name != "undefined" && name.length > 1){
+				socket.emit('newHighscore', {
+					name: name,
+					correct: numcorrect,
+					nofq: nofq,
+					time: timer
+				})
+				$("#name-div").dialog("close");
+				popup("good", "You new highscore was sent.");
+			}else{
+				popup("bad", "Please enter valid initials (Greater that 1 letter)");
+			}
+			break;
+	}
+}
+
+function instructions(mode){
+	switch(mode){
+		case 0:
+			document.getElementById("nav1").innerHTML = "Instructions";
+			document.getElementById("nav2").innerHTML = "";
+			document.getElementById("nav2btn").setAttribute("onclick", "");
+			document.getElementById("nav3").innerHTML = "Close";
+			document.getElementById("nav3btn").setAttribute("onclick", "instructions(1)");
+			document.title = "Instructions" + " |" + document.title.split("|")[1];
+			document.getElementById('home').style.display = "none";
+			document.getElementById('instructions').style.display = "block";
+			break;
+		case 1:
+			document.getElementById("nav1").innerHTML = "Home";
+			document.getElementById("nav3").innerHTML = "Settings";
+			document.getElementById("nav3btn").setAttribute("onclick", "settings(0)");
+			document.getElementById("nav2").innerHTML = "Play";
+			document.getElementById("nav2btn").setAttribute("onclick", "play()");
+			document.title = "Home" + " |" + document.title.split("|")[1];
+			document.getElementById('home').style.display = "block";
+			document.getElementById('instructions').style.display = "none";
+			break;
+	}
+}
 
 function credits(m) {
 	switch(m){
