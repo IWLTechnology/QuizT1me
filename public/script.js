@@ -352,10 +352,10 @@ function afterTitle() {
 	document.getElementById("title").style.display = "none";
 	document.getElementById("questionName").innerHTML =
 		questions[chosenQuestions[0]];
-	document.getElementById("answer1").innerHTML = answers[chosenQuestions[0]][0];
-	document.getElementById("answer2").innerHTML = answers[chosenQuestions[0]][1];
-	document.getElementById("answer3").innerHTML = answers[chosenQuestions[0]][2];
-	document.getElementById("answer4").innerHTML = answers[chosenQuestions[0]][3];
+	document.getElementById("answer1").innerHTML = "<b>A)</b> " + answers[chosenQuestions[0]][0];
+	document.getElementById("answer2").innerHTML = "<b>B)</b> " + answers[chosenQuestions[0]][1];
+	document.getElementById("answer3").innerHTML = "<b>C)</b> " + answers[chosenQuestions[0]][2];
+	document.getElementById("answer4").innerHTML = "<b>D)</b> " + answers[chosenQuestions[0]][3];
 	document.getElementById("nav2").innerHTML = "Question 1 of " + nofq + "";
 	document.getElementById("question").style.display = "block";
 	document.body.addEventListener("keyup", keyPress);
@@ -493,7 +493,6 @@ function keyPress(ev){
 				break;
 	}
 }
-//c is broken
 
 function answered(provided) {
 	document.body.removeEventListener("keyup", keyPress);
@@ -545,13 +544,13 @@ function answered(provided) {
 				document.getElementById("questionName").innerHTML =
 					questions[chosenQuestions[currentQuestion]];
 				document.getElementById("answer1").innerHTML =
-					answers[chosenQuestions[currentQuestion]][0];
+					"<b>A)</b> " + answers[chosenQuestions[currentQuestion]][0];
 				document.getElementById("answer2").innerHTML =
-					answers[chosenQuestions[currentQuestion]][1];
+					"<b>B)</b> " + answers[chosenQuestions[currentQuestion]][1];
 				document.getElementById("answer3").innerHTML =
-					answers[chosenQuestions[currentQuestion]][2];
+					"<b>C)</b> " + answers[chosenQuestions[currentQuestion]][2];
 				document.getElementById("answer4").innerHTML =
-					answers[chosenQuestions[currentQuestion]][3];
+					"<b>D)</b> " + answers[chosenQuestions[currentQuestion]][3];
 				document.getElementById("question").style.display = "block";
 				document.getElementById("nav2").innerHTML = "Question " + (currentQuestion + 1) + " of " + nofq + "";
 				document.body.addEventListener("keyup", keyPress);
@@ -652,7 +651,7 @@ function closeName(mode){
 			break;
 		case 1:
 			var name = document.getElementById('nameInput').value;
-			if(name != "" && name != "NaN" && name != NaN && name != undefined && name != "undefined" && name.length > 1){
+			if(name != "" && name != "NaN" && name != NaN && name != undefined && name != "undefined" && name.length > 1 && name.search("'") == -1 && name.search('"') == -1 && name.search("&") == -1 && name.search("%") == -1 && name.search("_") == -1){
 				socket.emit('newHighscore', {
 					name: name,
 					correct: numcorrect,
@@ -662,7 +661,7 @@ function closeName(mode){
 				$("#name-div").dialog("close");
 				popup("good", "You new highscore was sent.");
 			}else{
-				popup("bad", "Please enter valid initials (Greater that 1 letter)");
+				popup("bad", "Please enter valid initials (Greater that 1 letter, no symbols except comma, question mark and full stop)");
 			}
 			break;
 	}
