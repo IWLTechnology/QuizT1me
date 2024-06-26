@@ -1,10 +1,11 @@
 
-const fs = require("fs");
-const dbFile = "./.data/data.db";
-const exists = fs.existsSync(dbFile);
-const sqlite3 = require("sqlite3").verbose();
-const dbWrapper = require("sqlite");
-let db;
+var fs = require("fs");
+var dbFile = "./.data/data.db";
+var exists = fs.existsSync(dbFile);
+var sqlite3 = require("sqlite3").verbose();
+var dbWrapper = require("sqlite");
+var SqlString = require('sqlstring')
+var db;
 
 dbWrapper
 	.open({
@@ -47,9 +48,13 @@ module.exports = {
 
 	addHighscore: async data => {
 		try {
+			var name = SqlString.escape(data.name);
+			var correct = SqlString.escape(data.correct);
+			var time = SqlString.escape(data.time);
+			var nofq = SqlString.escape(data.nofq);
 			return await db.all(`UPDATE Highscores
-SET name = '${data.name}', correct = '${data.correct}', time = '${data.time}'
-WHERE nofq = '${data.nofq}';
+SET name = '${name}', correct = '${correct}', time = '${time}'
+WHERE nofq = '${nofq}';
 `);
 
 		} catch (dbError) {
