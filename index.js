@@ -47,9 +47,6 @@ io.on('connection', async (socket) => {
 	socket.on('newHighscore', async (data) => {
 		 db.addHighscore({ time: data.time, name: data.name, correct: data.correct, nofq: data.nofq});
 	});
-	socket.on('message', (result) => {
-		console.log(result.message);
-	})
 })
 
 server.listen(3000, () => {
