@@ -53,7 +53,7 @@ module.exports = {
 			var time = SqlString.escape(data.time);
 			var nofq = SqlString.escape(data.nofq);
 			return await db.all(`UPDATE Highscores
-SET name = '${name}', correct = '${correct}', time = '${time}'
+SET name = ${name}, correct = '${correct}', time = '${time}'
 WHERE nofq = '${nofq}';
 `);
 
