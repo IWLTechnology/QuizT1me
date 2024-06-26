@@ -66,7 +66,7 @@ var answers = [
 	["Dingo", "Red Fox", "Humpback Whale", "Blue Whale"],
 	["Frog", "Monkey", "Wolf", "Fox"],
 	["37", "1", "2", "11"],
-	["0", "1", "-2", "2"],
+	["0", "1", "3", "2"],
 	[
 		"The Bubonic Plague",
 		"The Bulonic Plague",
